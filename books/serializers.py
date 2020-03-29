@@ -11,12 +11,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
+    author = serializers.SlugRelatedField(slug_field='id', queryset=Author.objects.all())
+
     class Meta:
         model = Book
-        fields = ['title', 'author', 'page_count']
+        fields = ['id', 'title', 'author', 'page_count', 'url']
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Author
-        fields = ['first_name', 'last_name', 'birth_time', 'bio']
+        fields = ['id', 'first_name', 'last_name', 'birth_year', 'bio', 'url']
